@@ -1,0 +1,14 @@
+lang=cpp #programming language
+lr=5e-6
+batch_size=32
+beam_size=1
+source_length=256
+target_length=64
+data_dir=../dataset
+output_dir=out_dir_adv
+train_file=../data/cache/train
+dev_file=../data/cache/dev
+epochs=10 
+# pretrained_model=../coderbert/ #Roberta: roberta-base
+pretrained_model=/home/pritam/MRC/pretrained_model/robertacsv
+CUDA_VISIBLE_DEVICES=2,3 python adversarial_question_generator.py --do_train --do_eval --model_type roberta --model_name_or_path /home/pritam/MRC/pretrained_model/roberta --train_filename /home/pritam/MRC/output/reddit_ner.csv --dev_filename ../data/test_squad.csv --output_dir $output_dir --max_source_length $source_length --max_target_length $target_length --beam_size $beam_size --train_batch_size $batch_size --eval_batch_size $batch_size --learning_rate $lr --gen_path /home/pritam/MRC/question_generator/out_dir_dist/checkpoint-best-bleu/pytorch_model.bin --disc_path /home/pritam/MRC/question_generator/fine_dis/model.bin  --num_train_epochs 20

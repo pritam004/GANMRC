@@ -1,0 +1,14 @@
+lang=cpp #programming language
+lr=5e-5
+batch_size=32
+beam_size=10
+source_length=256
+target_length=128
+data_dir=../dataset
+output_dir=out_dir_distil
+train_file=../data/cache/train
+dev_file=../data/cache/dev
+epochs=10 
+# pretrained_model=../coderbert/ #Roberta: roberta-base
+pretrained_model=/home/pritam/MRC/pretrained_model/roberta
+CUDA_VISIBLE_DEVICES=0 python run.py --do_train --do_eval --model_type roberta --model_name_or_path /home/pritam/MRC/pretrained_model/roberta --train_filename ../data/train_squad.csv --dev_filename ../data/test_squad.csv --output_dir $output_dir --max_source_length $source_length --max_target_length $target_length --beam_size $beam_size --train_batch_size $batch_size --eval_batch_size $batch_size --learning_rate $lr --num_train_epochs 50

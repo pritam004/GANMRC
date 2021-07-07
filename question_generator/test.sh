@@ -1,0 +1,22 @@
+lang=cpp #programming language
+lr=5e-5
+batch_size=32
+beam_size=10
+source_length=256
+target_length=128
+data_dir=../dataset
+output_dir=../out_new
+train_file=../data/cache/train
+dev_file=../data/cache/dev
+epochs=10 
+pretrained_model=../coderbert/ 
+batch_size=64
+dev_file=../data/cache/dev
+test_file=../data/cache/test_small
+test_model=$output_dir/checkpoint-best-ppl/pytorch_model.bin #checkpoint for test
+CUDA_VISIBLE_DEVICES=1 python run.py --do_test --model_type roberta --model_name_or_path /home/pritam/MRC/pretrained_model/roberta/ --load_model_path out_dir_distil/checkpoint-best-bleu/pytorch_model.bin --dev_filename  /home/pritam/MRC/output/new_wiki_ner.csv  --output_dir $output_dir --max_source_length $source_length --max_target_length $target_length --beam_size $beam_size --eval_batch_size $batch_size --data_type new_wiki &&
+# CUDA_VISIBLE_DEVICES=1 python run.py --do_test --model_type roberta --model_name_or_path /home/pritam/MRC/pretrained_model/roberta/ --load_model_path out_dir_distil/checkpoint-best-bleu/pytorch_model.bin --dev_filename  /home/pritam/MRC/output/amazon_ner.csv  --output_dir $output_dir --max_source_length $source_length --max_target_length $target_length --beam_size $beam_size --eval_batch_size $batch_size --data_type amazon &&
+# CUDA_VISIBLE_DEVICES=1 python run.py --do_test --model_type roberta --model_name_or_path /home/pritam/MRC/pretrained_model/roberta/ --load_model_path out_dir_distil/checkpoint-best-bleu/pytorch_model.bin --dev_filename  /home/pritam/MRC/output/reddit_ner.csv  --output_dir $output_dir --max_source_length $source_length --max_target_length $target_length --beam_size $beam_size --eval_batch_size $batch_size --data_type reddit &&
+# CUDA_VISIBLE_DEVICES=1 python run.py --do_test --model_type roberta --model_name_or_path /home/pritam/MRC/pretrained_model/roberta/ --load_model_path out_dir_distil/checkpoint-best-bleu/pytorch_model.bin --dev_filename  /home/pritam/MRC/output/nyt_ner.csv  --output_dir $output_dir --max_source_length $source_length --max_target_length $target_length --beam_size $beam_size --eval_batch_size $batch_size --data_type nyt &&
+
+# CUDA_VISIBLE_DEVICES=0 python run.py --do_test --model_type roberta --model_name_or_path /home/pritam/MRC/pretrained_model/roberta/ --load_model_path out_dir_distil/checkpoint-best-bleu/pytorch_model.bin --dev_filename  /home/pritam/MRC/output/medical_ner.csv  --output_dir $output_dir --max_source_length $source_length --max_target_length $target_length --beam_size $beam_size --eval_batch_size $batch_size --data_type medical 
